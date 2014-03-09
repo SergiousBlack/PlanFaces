@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title></title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:menubar>  
+                <p:submenu label="Плани" icon="ui-icon-document">  
+                    <p:submenu label="Навчальний план"> 
+                        <p:menuitem value="Графік навчального процесу" oncomplete="PF('QuestionDialogCreatePlanMAFAKA').show();" onclick = "#{tableBean.clearPannels()}"/> 
+                        <p:menuitem value="План навчального процесу" oncomplete = "PF('PlanStudy').show();" onclick = "#{tableBean.clearPannels()}"/> 
+                    </p:submenu>
+                    <p:submenu label="Робочий навчальний план"> 
+                        <p:menuitem value="Формування"/> 
+                        <p:separator />  
+                        <p:menuitem value="Графік навчального процесу"/> 
+                        <p:menuitem value="План навчального процесу"/> 
+                    </p:submenu>
+                    <p:menuitem value="Список" action="#{planlist.insertData()}"/> 
+                </p:submenu>  
+                <p:submenu label="Довідники" icon="ui-icon-document"> 
+                    <p:menuitem value="Довідник Дисциплін" action="#{specialityDataBean.download()}"/> 
+                    <p:menuitem value="Довідник Циклів" action="#{cycleDicBean.download()}"/>
+                </p:submenu>
+                <p:menuitem action="#{tableBean.logout()}" value="Вийти" icon="ui-icon-close" />  
+            </p:menubar>  
+
+            <p:growl id="msgs" showDetail="true"/>
+
+            <!-- Диалог отображаемый при нажатии "Графік навчального процесу" -->
+
+            <p:dialog modal="true" widgetVar="QuestionDialogCreatePlanMAFAKA" showEffect="blind" hideEffect="bounce" width="700" resizable="false" header="Параметри навчального плану">  
+                <p:panel id="CreatorPanel" style="margin-bottom:5px;">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Форма навчання" for="EduForm" />
+                        <p:selectOneMenu id="EduForm" value="#{tableBean.eduForm}" label="EduForm">  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.eduForms}" /> 
+                            <p:ajax update="Galuz"  
+                                    listener="#{tableBean.updateGaluz()}" />
+                        </p:selectOneMenu>  
+
+                        <h:outputLabel value="Галузь знань" for="Galuz" />
+                        <p:selectOneMenu id="Galuz" value="#{tableBean.gzdata}">  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.galuzData}"/>
+                            <p:ajax update="OKR"  
+                                    listener="#{tableBean.updateOKR()}" />
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Освітньо-кваліфікаційний рівень" for="OKR" />
+                        <p:selectOneMenu id="OKR" value="#{tableBean.OKR}">  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.okr}" />
+                            <p:ajax update="napr,spec"  
+                                    listener="#{tableBean.update()}" />
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Напрям" for="napr" />
+                        <p:selectOneMenu id="napr" value="#{tableBean.napr}">  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.naprav}"/>
+                        </p:selectOneMenu>
+
+
+                        <h:outputLabel value="Спеціальність" for="spec" />
+                        <p:selectOneMenu id="spec" value="#{tableBean.spec}" >  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.specList}"/>
+                            <p:ajax update="specialization"  
+                                    listener="#{tableBean.updateSpecialization()}" />
+                        </p:selectOneMenu>
+
+
+                        <h:outputLabel value="Спеціалізація" for="specialization" />
+                        <p:selectOneMenu id="specialization" value="#{tableBean.specialization}" >  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.specializationList}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Дата: " />  
+                        <p:inputMask value="#{tableBean.date}" mask="9999" style="width: 60px"/> 
+
+                        <h:commandButton id="btn" value="Создать" action ="newPlan?faces-redirect=true" actionListener="#{tableBean.clear()}" />  
+
+                    </h:panelGrid>
+                </p:panel> 
+            </p:dialog>  
+        </h:form>
+
+        <h:form>
+            <!-- Диалог отображаемый при нажатии "План навчального процесу" -->
+                    <p:dialog modal="true" widgetVar="PlanStudy" showEffect="blind" hideEffect="bounce" width="900" resizable="false" header="Параметри навчального плану">  
+                <p:panel id="CreatorPanel" style="margin-bottom:5px;">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Форма навчання" for="EduForm" />
+                        <p:selectOneMenu id="EduForm" value="#{tableBean.eduForm}" label="EduForm">  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.eduForms}" /> 
+                            <p:ajax update="Galuz"  
+                                    listener="#{tableBean.updateGaluz()}" />
+                        </p:selectOneMenu>  
+
+                        <h:outputLabel value="Галузь знань" for="Galuz" />
+                        <p:selectOneMenu id="Galuz" value="#{tableBean.gzdata}">  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.galuzData}"/>
+                            <p:ajax update="OKR"  
+                                    listener="#{tableBean.updateOKR()}" />
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Освітньо-кваліфікаційний рівень" for="OKR" />
+                        <p:selectOneMenu id="OKR" value="#{tableBean.OKR}">  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.okr}" />
+                            <p:ajax update="napr,spec"  
+                                    listener="#{tableBean.update()}" />
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Напрям" for="napr" />
+                        <p:selectOneMenu id="napr" value="#{tableBean.napr}">  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.naprav}"/>
+                        </p:selectOneMenu>
+
+
+                        <h:outputLabel value="Спеціальність" for="spec" />
+                        <p:selectOneMenu id="spec" value="#{tableBean.spec}" >  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.specList}"/>
+                            <p:ajax update="specialization"  
+                                    listener="#{tableBean.updateSpecialization()}" />
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Спеціалізація" for="specialization" />
+                        <p:selectOneMenu id="specialization" value="#{tableBean.specialization}" >  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.specializationList}"/>
+                        </p:selectOneMenu>
+                        
+                         <h:outputLabel value="Цикл навчального процесу" for="cycle" />
+                         <p:selectOneMenu id="cycle" value="#{tableBean.selectedCycle}" >  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{tableBean.cycle}"/>
+                        </p:selectOneMenu>
+                         
+                        <h:outputText value="Дата: " />  
+                        <p:inputMask value="#{tableBean.date}" mask="9999" style="width: 60px"/> 
+
+                        <h:commandButton id="btn" value="Создать" action ="#{studyNewPlanBean.initializeForm()}" />  
+
+                    </h:panelGrid>
+                </p:panel> 
+            </p:dialog> 
+        </h:form>
+    </h:body>
+</html>
+

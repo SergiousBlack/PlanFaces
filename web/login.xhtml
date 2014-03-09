@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"    
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+        <title>Авторизація</title>
+        <meta name="viewport" content="width=device-width"/>
+    </h:head>
+    <h:body>
+        <h:form id="form" style="width:350px; text-align: center; margin:0 auto">
+
+            <p:panel header="Авторизація">
+
+                <h:panelGrid id="grid" columns="2" style="margin-bottom:10px">
+                    <f:facet name="header">  
+                        <p:messages />  
+                    </f:facet>    
+                    <h:outputLabel for="login" value="Логін:" />
+                    <p:inputText  id="login" value="#{logAdmin.login}" required="true" requiredMessage="Введіть логін"/>
+                    <h:outputLabel for="pass" value="Пароль:" />
+                    <p:password  id="pass" value="#{logAdmin.password}" required="true" requiredMessage="Введіть пароль"/>
+                </h:panelGrid>
+                <p:commandButton action="#{logAdmin.Enter()}"   value="Вхід" id="loin" update="grid"  />
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>

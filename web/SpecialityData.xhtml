@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>План навчального процесу</title>
+
+    </h:head>
+    <h:body>
+        <ui:include src="MainMenu.xhtml"/>
+        <h:form id="form">
+            <p:growl id="growl" showDetail="true"  />
+            <p:dataTable id="cars" var="item" value="#{specialityDataBean.list}" rowKey="#{item.disciple}" 
+                         selection="#{specialityDataBean.select}" selectionMode="single">
+
+                <f:facet name="header">
+                    <p:commandButton id ="insertButton" oncomplete="PF('data').show()" value="Добавить дисциплину" actionListener="#{specialityDataBean.clear()}" update=":form:display"/>
+                    <p:commandButton id ="updateButton" actionListener="#{specialityDataBean.update()}" oncomplete="PF('dat').show()" update =":form:disp" value="Редактировать дисциплину" />  
+                    <p:commandButton id="delButton" action="#{specialityDataBean.deleteData()}" update=":form:cars" value="Удалить" icon="ui-icon-lol" />
+                </f:facet>
+
+                <p:column headerText="Дисципліни" style="width: 50%">
+                    #{item.disciple}
+                </p:column>
+
+                <p:column headerText="Цикли" style="width: 50%">
+                       #{item.cycle}
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog id="dialog" header="Добавление дисциплины" widgetVar="data"
+                      showEffect="fade" hideEffect="explode">  
+
+                <h:panelGrid id="display" columns="2" >  
+                    <h:outputLabel value="Дисциплина" for="napr" />
+                    <h:inputText id="napr" value="#{specialityDataBean.addNewDisciple}" style="width: 600px;"/>  
+                     <h:outputLabel value="Цикл" for="OKR" />
+                     <p:selectOneMenu id="OKR" value="#{specialityDataBean.selectCycle}">  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{specialityDataBean.cycle}" />
+                        </p:selectOneMenu>
+                    <p:commandButton value="Добавить" oncomplete="PF('data').hide();" actionListener="#{specialityDataBean.addSpecialityToBase()}" update=":form:cars,:form:growl"/>
+                    <p:commandButton value="Отмена" oncomplete="PF('data').hide();"/>
+
+                </h:panelGrid>  
+            </p:dialog>
+
+            <p:dialog id="dialogue" header="Редактирование дисциплины" widgetVar="dat"
+                      showEffect="fade" hideEffect="explode">  
+
+                <h:panelGrid id="disp" columns="2" >  
+                    <h:outputLabel value="Дисциплина" for="qwe" />
+                    <h:inputText id="qwe" value="#{specialityDataBean.updNewDisciple}" style="width: 600px;"/> 
+                    <h:outputLabel value="Цикл" for="OKR1" />
+                    <p:selectOneMenu id="OKR1" value="#{specialityDataBean.cycleUPD}">  
+                            <f:selectItem itemLabel="" itemValue="" />  
+                            <f:selectItems value="#{specialityDataBean.cycle}" />
+                        </p:selectOneMenu>
+                    <p:commandButton value="Редактировать" oncomplete="PF('dat').hide();" actionListener="#{specialityDataBean.updSpecialityToBase()}" update=":form:cars"/>
+                    <p:commandButton value="Отмена" oncomplete="PF('dat').hide();"/>
+
+                </h:panelGrid>  
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>

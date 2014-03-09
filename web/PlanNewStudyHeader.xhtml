@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>План навчального процесу</title>
+       
+    </h:head>
+    <h:body>
+         <ui:include src="MainMenu.xhtml" />
+         <h:form>
+        <p:menubar>   
+            <p:menuitem action="#{studyNewPlanBean.addLine()}" value="Добавить запись" icon="ui-icon-close" update=":form:planStudy" />  
+            <p:menuitem value="#{studyNewPlanBean.cycleNow}" disabled="true" style="position: absolute; right: 50%; "/>
+            <p:menuitem action="#{studyNewPlanBean.savePlan()}" value="Сохранить план" style="position: absolute;right: 10px;"/>
+        </p:menubar> 
+         </h:form>
+         <h:form id="form">  
+             <p:dataTable id="planStudy" var="study" editable="true" editMode="cell" value="#{studyNewPlanBean.plan}">  
+  
+        <f:facet name="header">  
+             План навчального процесу
+        </f:facet>  
+  
+        <p:columnGroup type="header">  
+            <p:row>  
+                <p:column rowspan="7" headerText="Шифр ОПП" style="width: 5px;" />
+                <p:column rowspan="7" headerText="Назва навчальної дисципліни" style="width: 300px" />  
+                 <p:column colspan="4" headerText="Розподіл за семестрами" style="width: 100px"/>
+                 <p:column rowspan="7" headerText="К р е д и т и" style="width: 5px; height: 100px;"/>
+                 <p:column colspan="6" headerText="Кількість годин" style="width: 100px"/>
+                  <p:column colspan="10" headerText="Розподіл годин на тиждень за курсами і семестрами" />
+            </p:row>  
+            <p:row>  
+                <p:column rowspan="6" headerText="Е к з а м е н и" style="width: 5px"/>
+                <p:column rowspan="6"  headerText="З а л і к и" style="width: 5px"/>
+                <p:column colspan="2" headerText="Курсові" style="width: 5px"/>
+                
+                <p:column rowspan="5" headerText="В з а г а л і" style="width: 5px"/>
+                <p:column colspan="4" headerText="Аудиторних" style="width: 5px"/>
+                <p:column rowspan="5"  headerText="С / Р" style="width: 5px"/>
+                
+                <p:column colspan="2" headerText="I курс" style="width: 5px"/>
+                <p:column colspan="2" headerText="II курс" style="width: 5px"/>
+                <p:column colspan="2" headerText="III курс" style="width: 5px"/>
+                <p:column colspan="2" headerText="IV курс" style="width: 5px"/>
+                <p:column colspan="2" headerText="V курс" style="width: 5px"/>
+     
+            </p:row>  
+            <p:row>
+                <p:column rowspan="4" headerText="Проекти" style="width: 100px"/>
+                <p:column rowspan="4" headerText="Роботи" style="width: 100px"/>
+                
+                <p:column rowspan="4" headerText="В с ь о г о" style="width: 5px"/>
+                <p:column colspan="3" headerText="В тому числі:" style="width: 5px"/>
+                
+                <p:column colspan="10" headerText="Семестри" style="width: 5px"/>
+            </p:row>
+            <p:row>
+                 <p:column rowspan="3" headerText="Лекціі" style="width: 5px"/>
+                 <p:column rowspan="3" headerText="Лабораторні" style="width: 5px"/>
+                 <p:column rowspan="3" headerText="Практичні" style="width: 5px"/>
+                 
+                 <p:column  headerText="1" style="width: 5px"/>
+                 <p:column  headerText="2" style="width: 5px"/>
+                 <p:column  headerText="3" style="width: 5px"/>
+                 <p:column  headerText="4" style="width: 5px"/>
+                 <p:column  headerText="5" style="width: 5px"/>
+                 <p:column  headerText="6" style="width: 5px"/>
+                 <p:column  headerText="7" style="width: 5px"/>
+                 <p:column  headerText="8" style="width: 5px"/>
+                 <p:column  headerText="9" style="width: 5px"/>
+                 <p:column  headerText="10" style="width: 5px"/>
+            </p:row>
+            <p:row>  
+              <!-- <p:column colspan="10" headerText="Кількість тижнів в семестрі" style="width: 5px"/>-->
+            </p:row>  
+            
+        </p:columnGroup>  
+
+            <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.OOP}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.OOP}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                 
+        <p:column style="width:25%">  
+            <p:cellEditor>  
+                <f:facet name="output"><h:outputText value="#{study.disciple}" /></f:facet>  
+                <f:facet name="input">  
+                    <h:selectOneMenu value="#{study.disciple}" style="width:100%">  
+                        <f:selectItems value="#{studyNewPlanBean.typesDisciple}" var="man" itemLabel="#{man}" itemValue="#{man}" />  
+                    </h:selectOneMenu>  
+                </f:facet>  
+            </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.SEkzam}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.SEkzam}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.SZal}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.SZal}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.SKProj}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.SKProj}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.SKWork}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.SKWork}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.credits}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.credits}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.vzagali}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.vzagali}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.all}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.all}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.lecture}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.lecture}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.laborary}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.laborary}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.practic}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.practic}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.SR}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.SR}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.g1}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.g1}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.g2}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.g2}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.g3}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.g3}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.g4}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.g4}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.g5}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.g5}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.g6}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.g6}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.g7}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.g7}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.g8}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.g8}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.g9}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.g9}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+                  <p:column style="width:25%">  
+               <p:cellEditor>  
+                   <f:facet name="output"><h:outputText value="#{study.g10}" /></f:facet>  
+                   <f:facet name="input"><p:inputText  value="#{study.g10}" style="width:96%"/></f:facet>  
+               </p:cellEditor>  
+           </p:column>  
+               
+                 
+            
+    </p:dataTable>  
+</h:form>  
+         
+    </h:body>
+</html>
