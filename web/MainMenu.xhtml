@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:menubar>  
+            <p:menubar autoDisplay="false">  
                 <p:submenu label="Плани" icon="ui-icon-document">  
                     <p:submenu label="Навчальний план"> 
                         <p:menuitem value="Графік навчального процесу" oncomplete="PF('QuestionDialogCreatePlanMAFAKA').show();" onclick = "#{tableBean.clearPannels()}"/> 
@@ -17,24 +17,22 @@
                     </p:submenu>
                     <p:submenu label="Робочий навчальний план"> 
                         <p:menuitem value="Формування"/> 
-                        <p:separator />  
-                        <p:menuitem value="Графік навчального процесу"/> 
-                        <p:menuitem value="План навчального процесу"/> 
                     </p:submenu>
-                    <p:menuitem value="Список" action="#{planlist.insertData()}"/> 
+                 <p:menuitem value="Список планів" action="PlanSelectView.xhtml?faces-redirect=true"/> 
                 </p:submenu>  
                 <p:submenu label="Довідники" icon="ui-icon-document"> 
                     <p:menuitem value="Довідник Дисциплін" action="#{specialityDataBean.download()}"/> 
                     <p:menuitem value="Довідник Циклів" action="#{cycleDicBean.download()}"/>
+                    <p:menuitem value="Умовні значення" action="#{oznak.enjoy()}" />
                 </p:submenu>
-                <p:menuitem action="#{tableBean.logout()}" value="Вийти" icon="ui-icon-close" />  
+                <p:menuitem action="#{tableBean.logout()}" value="Вийти" icon="ui-icon-close" style="position: absolute;right: 0; border: 1px solid #a8a8a8; margin-right: 5px;" />  
             </p:menubar>  
 
             <p:growl id="msgs" showDetail="true"/>
 
             <!-- Диалог отображаемый при нажатии "Графік навчального процесу" -->
 
-            <p:dialog modal="true" widgetVar="QuestionDialogCreatePlanMAFAKA" showEffect="blind" hideEffect="bounce" width="700" resizable="false" header="Параметри навчального плану">  
+            <p:dialog modal="true" widgetVar="QuestionDialogCreatePlanMAFAKA"  width="700" resizable="false" header="Параметри навчального плану">  
                 <p:panel id="CreatorPanel" style="margin-bottom:5px;">
                     <h:panelGrid columns="2">
                         <h:outputLabel value="Форма навчання" for="EduForm" />
@@ -86,7 +84,7 @@
                         <h:outputText value="Дата: " />  
                         <p:inputMask value="#{tableBean.date}" mask="9999" style="width: 60px"/> 
 
-                        <h:commandButton id="btn" value="Создать" action ="newPlan?faces-redirect=true" actionListener="#{tableBean.clear()}" />  
+                        <h:commandButton id="btn" value="Создать" action ="#{graphBean.nGraph()}" />  
 
                     </h:panelGrid>
                 </p:panel> 
@@ -95,7 +93,7 @@
 
         <h:form>
             <!-- Диалог отображаемый при нажатии "План навчального процесу" -->
-                    <p:dialog modal="true" widgetVar="PlanStudy" showEffect="blind" hideEffect="bounce" width="900" resizable="false" header="Параметри навчального плану">  
+                    <p:dialog modal="true" widgetVar="PlanStudy"  width="900" resizable="false" header="Параметри навчального плану">  
                 <p:panel id="CreatorPanel" style="margin-bottom:5px;">
                     <h:panelGrid columns="2">
                         <h:outputLabel value="Форма навчання" for="EduForm" />

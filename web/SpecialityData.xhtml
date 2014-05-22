@@ -12,11 +12,20 @@
     <h:body>
         <ui:include src="MainMenu.xhtml"/>
         <h:form id="form">
+            
+    <p:contextMenu for="cars">  
+        <p:menuitem id ="insertButton" oncomplete="PF('data').show()" value="Добавить дисциплину" actionListener="#{specialityDataBean.clear()}" update=":form:display"/>
+        <p:menuitem id ="updateButton" actionListener="#{specialityDataBean.update()}" oncomplete="PF('dat').show()" update =":form:disp" value="Редактировать дисциплину" />  
+        <p:menuitem id="delButton" action="#{specialityDataBean.deleteData()}" update=":form:cars" value="Удалить" />
+        <p:menuitem id="duplicate" action="#{specialityDataBean.duplicate()}" update=":form:cars" value="Дублировать" />
+     </p:contextMenu>
+            
             <p:growl id="growl" showDetail="true"  />
             <p:dataTable id="cars" var="item" value="#{specialityDataBean.list}" rowKey="#{item.disciple}" 
-                         selection="#{specialityDataBean.select}" selectionMode="single">
+                         selection="#{specialityDataBean.select}" selectionMode="multiple" scrollable="true" scrollHeight="600">
 
                 <f:facet name="header">
+                    <p:commandButton id="duplicate" action="#{specialityDataBean.duplicate()}" update=":form:cars" value="Дублировать" />
                     <p:commandButton id ="insertButton" oncomplete="PF('data').show()" value="Добавить дисциплину" actionListener="#{specialityDataBean.clear()}" update=":form:display"/>
                     <p:commandButton id ="updateButton" actionListener="#{specialityDataBean.update()}" oncomplete="PF('dat').show()" update =":form:disp" value="Редактировать дисциплину" />  
                     <p:commandButton id="delButton" action="#{specialityDataBean.deleteData()}" update=":form:cars" value="Удалить" icon="ui-icon-lol" />
@@ -32,7 +41,7 @@
             </p:dataTable>
 
             <p:dialog id="dialog" header="Добавление дисциплины" widgetVar="data"
-                      showEffect="fade" hideEffect="explode">  
+                      >  
 
                 <h:panelGrid id="display" columns="2" >  
                     <h:outputLabel value="Дисциплина" for="napr" />
@@ -49,7 +58,7 @@
             </p:dialog>
 
             <p:dialog id="dialogue" header="Редактирование дисциплины" widgetVar="dat"
-                      showEffect="fade" hideEffect="explode">  
+                     >  
 
                 <h:panelGrid id="disp" columns="2" >  
                     <h:outputLabel value="Дисциплина" for="qwe" />

@@ -1,4 +1,7 @@
+package BeanClasses;
 
+
+import DataBase.DataBaseConnector;
 import java.io.Serializable;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -18,6 +21,7 @@ public class LoginAdmin implements Serializable {
     private String password;
     private String fio;
     private int adminid;
+     
 
     //-------------------------------
     public String getLogin() {

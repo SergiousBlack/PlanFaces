@@ -11,15 +11,38 @@
     
     <h:body>
         <ui:include src="MainMenu.xhtml" />
-   
+   <ui:include src="SelectFormForPlan.xhtml"/>
   <h:form id="form">
-      <p:dataTable id="cars" var="planitem" value="#{planlist.carsSmall}" rowKey="#{planitem.name}"
-                          selection="#{planlist.selectedCar}" selectionMode="single">
-        <p:column headerText="Название графика">
-                #{planitem.name}
+      <p:dataTable id="cars" var="planitem" value="#{planlist.carsSmall}" rowKey="#{planitem.idplan}"
+                   emptyMessage="Планов нет" selection="#{planlist.selectedCar}" selectionMode="single" scrollable="true" scrollHeight="500">
+          
+          <p:column  headerText="Номер плана" style="width: 6%" >
+                #{planitem.idplan}
         </p:column>
+          
+          <p:column  headerText="Дата" style="width: 10%; text-align: center" >
+                #{planitem.date}
+        </p:column>
+          <p:column headerText="ОКР" filterMatchMode="exact" filterBy="OKR" filterOptions="#{planlist.okrlist}" style="width:10%; text-align: center">
+                #{planitem.OKR}
+        </p:column>
+          <p:column  headerText="Форма обучения" filterMatchMode="exact" filterBy="eduform" filterOptions="#{planlist.formedulist}">
+                #{planitem.eduform}
+        </p:column>
+           <p:column headerText="Направление" >
+                #{planitem.napr}
+        </p:column>
+              <p:column headerText="Специальность" >
+                #{planitem.spec}
+        </p:column>
+              <p:column  headerText="Специализация" >
+                #{planitem.specialization}
+        </p:column>
+       
+          
         <f:facet name="footer">
             <p:commandButton id="viewButton" value="Просмотр" icon="ui-icon-search" action="SeePlan.xhtml?faces-redirect=true" actionListener="#{planlist.downloadData()}"/>
+            <p:commandButton id="drop" value="Удалить план" update=":form:cars" action="#{planlist.deleteplan()}" />
         </f:facet>
                 
     </p:dataTable>

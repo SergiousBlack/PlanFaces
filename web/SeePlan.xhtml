@@ -11,16 +11,16 @@
     </h:head>
     <h:body> 
         <ui:include src ="MainMenu.xhtml"/>
-       
-   <!-- <h:form >    
-    <p:menubar >
-        <p:menuitem id="SelfMenu" value="Добавить курс" actionListener = "#{tableBean.addyear()}" update=":Data:cars"/>
-        <p:menuitem value="Очистить все" actionListener ="#{tableBean.deleteyear()}" update=":Data:cars"/>
-    </p:menubar>  
-    </h:form>-->
+      
         
     <h:form id="Data">    
-        <p:dataTable id="cars" var="car" value="#{planlist.plans}" editable="true" editMode="cell" widgetVar="carsTable">  
+        <p:growl id="Message" showDetail="true" />
+        <p:menubar autoDisplay="false">
+            <p:menuitem value="Добавить курс" action="#{planlist.addLine()}" update=":Data:cars" />
+        </p:menubar>
+        
+        
+        <p:dataTable id="cars"  var="car" value="#{planlist.plans}"  editable="true" editMode="cell" widgetVar="carsTable">  
   
         <f:facet name="header">  
            Недели
@@ -567,16 +567,36 @@
             </p:cellEditor>  
         </p:column>
     </p:dataTable>
-    <br/>
-    
-    <br/><br/>
     <center>
-        
-        
-        <p:commandButton id="SaveBtn" value="Сохранить"  action="planList?faces-redirect=true" actionListener="#{planlist.updateData()}"/>  
-        
+        <br/>
+        <p:commandButton id="SaveBtn" value="Сохранить" update=":Data:Message" action="planList?faces-redirect=true" actionListener="#{planlist.updateData()}"/>  
     </center> 
         </h:form>  
+        
+        <h:form id="spinners">
+            <h:panelGrid columns="2" >
+                
+             <h:outputLabel for="min" value="ОТ: " />  
+            <p:spinner id="min"   
+                       value="#{planlist.otI}" min="1" max="53"/>  
+            
+            <h:outputLabel for="max" value="ДО: " />  
+            <p:spinner id="max"   
+                       value="#{planlist.doI}" min="1" max="53"/> 
+            
+            <h:outputLabel for="week" value="Укажите Курс" />  
+            <p:spinner id="week"   
+                       value="#{planlist.weekDO}" min="1" max="7"/> 
+            
+            <p:selectOneMenu id="list" value="#{planlist.selectedSelectinSelection}">  
+                <f:selectItem itemLabel="Выберите значение" itemValue="" />  
+                <f:selectItems value="#{tableBean.types}" />  
+            </p:selectOneMenu> 
+            
+            <p:commandButton value="Установить" action="#{planlist.seArray()}" update=":Data:Message :Data:cars"/>
+            </h:panelGrid>
+        </h:form>
+        
     </h:body>
 </html>
 

@@ -13,6 +13,7 @@
         <ui:include src ="MainMenu.xhtml"/>
        
     <h:form >    
+       
     <p:menubar >
         <p:menuitem id="SelfMenu" value="Добавить курс" actionListener = "#{tableBean.addyear()}" update=":Data:cars"/>
         <p:menuitem value="Очистить все" actionListener ="#{tableBean.deleteyear()}" update=":Data:cars"/>
@@ -20,7 +21,8 @@
     </h:form>
         
     <h:form id="Data">    
-    <p:dataTable id="cars" var="car" value="#{tableBean.plans}" editable="true" editMode="cell" widgetVar="carsTable">  
+        <p:growl id="Message" showDetail="true" />
+        <p:dataTable id="cars" var="car" value="#{tableBean.plans}" emptyMessage="Пусто" editable="true" editMode="cell" widgetVar="carsTable" >  
   
         <f:facet name="header">  
            Недели
@@ -567,15 +569,37 @@
             </p:cellEditor>  
         </p:column>
     </p:dataTable>
-    <br/>
-    
-    <br/><br/>
+
     <center>
-        
-        <p:commandButton id="SaveBtn" value="Сохранить" action="#{tableBean.saveToBase}" oncomplete="planList?faces-redirect=true"/>  
-        
+        <p:commandButton id="SaveBtn" value="Сохранить" action="#{tableBean.saveToBase()}" update=":Data:Message" oncomplete="index.xhtml?faces-redirect=true" />  
     </center> 
         </h:form>  
+        
+        
+        
+        <h:form id="spinners">
+            <h:panelGrid columns="2" >
+             <h:outputLabel for="min" value="ОТ: " />  
+            <p:spinner id="min"   
+                       value="#{tableBean.otI}" min="1" max="53"/>  
+            
+            <h:outputLabel for="max" value="ДО: " />  
+            <p:spinner id="max"   
+                       value="#{tableBean.doI}" min="1" max="53"/> 
+            
+            <h:outputLabel for="week" value="Укажите Курс" />  
+            <p:spinner id="week"   
+                       value="#{tableBean.weekDO}" min="1" max="7"/> 
+            
+            <p:selectOneMenu id="list" value="#{tableBean.selectedSelectinSelection}">  
+                <f:selectItem itemLabel="Выберите значение" itemValue="" />  
+                <f:selectItems value="#{tableBean.types}" />  
+            </p:selectOneMenu> 
+            
+            <p:commandButton value="Установить" action="#{tableBean.seArray()}" update=":Data:Message :Data:cars"/>
+            </h:panelGrid>
+        </h:form>
+        
     </h:body>
 </html>
 

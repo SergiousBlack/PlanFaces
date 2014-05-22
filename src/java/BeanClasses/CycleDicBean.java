@@ -1,4 +1,8 @@
+package BeanClasses;
 
+
+import DataBase.DataBaseConnector;
+import DataClasses.typeDic;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;

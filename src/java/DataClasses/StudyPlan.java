@@ -1,3 +1,5 @@
+package DataClasses;
+
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -5,7 +7,56 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class StudyPlan implements Serializable {
 
-    public int OOP;
+    public String OOP;
+    public int idplan;
+    private boolean inplan;
+
+    public boolean isInplan() {
+        return inplan;
+    }
+
+    public void setInplan(boolean inplan) {
+        this.inplan = inplan;
+    }
+
+    public StudyPlan(){
+    
+    }
+    public StudyPlan(String OOP, int idplan, String disciple, String SEkzam, String SZal, String SKProj, String SKWork, String Credits, String Vzagali, String All, String Lecture, String Laborary, String Practic, String SR, String g1, String g2, String g3, String g4, String g5, String g6, String g7, String g8, String g9, String g10,boolean inplan) {
+        this.OOP = OOP;
+        this.idplan = idplan;
+        this.disciple = disciple;
+        this.SEkzam = SEkzam;
+        this.SZal = SZal;
+        this.SKProj = SKProj;
+        this.SKWork = SKWork;
+        this.Credits = Credits;
+        this.Vzagali = Vzagali;
+        this.All = All;
+        this.Lecture = Lecture;
+        this.Laborary = Laborary;
+        this.Practic = Practic;
+        this.SR = SR;
+        this.g1 = g1;
+        this.g2 = g2;
+        this.g3 = g3;
+        this.g4 = g4;
+        this.g5 = g5;
+        this.g6 = g6;
+        this.g7 = g7;
+        this.g8 = g8;
+        this.g9 = g9;
+        this.g10 = g10;
+        this.inplan = inplan;
+    }
+
+    public int getIdplan() {
+        return idplan;
+    }
+
+    public void setIdplan(int idplan) {
+        this.idplan = idplan;
+    }
     public String disciple;
     public String SEkzam;
     public String SZal;
@@ -24,11 +75,11 @@ public class StudyPlan implements Serializable {
     public String g4;
     public String g5;
 
-    public int getOOP() {
+    public String getOOP() {
         return OOP;
     }
 
-    public void setOOP(int OOP) {
+    public void setOOP(String OOP) {
         this.OOP = OOP;
     }
 
@@ -207,8 +258,10 @@ public class StudyPlan implements Serializable {
     public void setG10(String g10) {
         this.g10 = g10;
     }
-    
-    public StudyPlan(int OOP, String Disciple, String SEkzam, String SZal, String SKProj, String SKWork, String Credits, String Vzagali, String All, String Lecture, String Laborary, String Practic, String SR, String g1, String g2, String g3, String g4, String g5, String g6, String g7, String g8, String g9, String g10) {
+    public StudyPlan(String OOP){
+        this.OOP = OOP;
+    }
+    public StudyPlan(String OOP, String Disciple, String SEkzam, String SZal, String SKProj, String SKWork, String Credits, String Vzagali, String All, String Lecture, String Laborary, String Practic, String SR, String g1, String g2, String g3, String g4, String g5, String g6, String g7, String g8, String g9, String g10,boolean planin) {
         this.OOP = OOP;
         this.disciple = Disciple;
         this.SEkzam = SEkzam;
@@ -232,6 +285,7 @@ public class StudyPlan implements Serializable {
         this.g8 = g8;
         this.g9 = g9;
         this.g10 = g10;
+        this.inplan = planin;
     }
   public String g6;
   public  String g7;

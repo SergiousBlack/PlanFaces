@@ -1,3 +1,5 @@
+package DataClasses;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,9 +12,9 @@
  */
 public class PlanValuesFromBase {
     
-        String week;
-        String Course;
-        String Value;
+      public  String week;
+      public  String Course;
+      public  String Value;
 
     public PlanValuesFromBase(String week, String Course, String Value) {
         this.week = week;

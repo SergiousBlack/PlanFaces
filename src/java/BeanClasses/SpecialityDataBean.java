@@ -1,4 +1,8 @@
+package BeanClasses;
 
+
+import DataBase.DataBaseConnector;
+import DataClasses.SpecialityData;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,7 +29,7 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class SpecialityDataBean implements Serializable {
     DataBaseConnector data;
-    public SpecialityData select;
+    public  SpecialityData[] select;
     public String addNewDisciple;
     public String updNewDisciple;
     public String selectCycle;
@@ -59,11 +63,11 @@ public class SpecialityDataBean implements Serializable {
     public void setAddNewDisciple(String addNewDisciple) {
         this.addNewDisciple = addNewDisciple;
     }
-    public SpecialityData getSelect() {
+    public SpecialityData[] getSelect() {
         return select;
     }
     
-    public void setSelect(SpecialityData select) {
+    public void setSelect(SpecialityData[] select) {
         this.select = select;
     }
      private String id;
@@ -79,7 +83,12 @@ public class SpecialityDataBean implements Serializable {
     public LoginAdmin admin;
     
     public void deleteData() throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException{
-        data.Query("Delete From dnamedic where iduser = "+id+" and name = '"+select.disciple+"'");
+        
+       for(SpecialityData sel:select)
+       {
+        data.Query("Delete From dnamedic where code = "+sel.idSpec);
+       }
+       
         String test = download();//Обновление списка это нихера не тест не удалять.
     }
     public void setAdmin(LoginAdmin messageBean) {
@@ -90,7 +99,7 @@ public class SpecialityDataBean implements Serializable {
 
     List<String> cycle = new ArrayList<String>();
 
-    public List<String> getCycle() {
+    public List<String>  getCycle() {
         return cycle;
     }
    public void addSpecialityToBase(){
@@ -106,18 +115,18 @@ public class SpecialityDataBean implements Serializable {
        }
    } 
    public void updSpecialityToBase(){
-       if(updNewDisciple != " "&& updNewDisciple!= null){
-           try {
+       //if(updNewDisciple != " "&& updNewDisciple!= null){
+          try {
                 String k = data.getInformationAboutIdCycleByname(cycleUPD,id);
-              data.Query("Update dnamedic  set name = '"+updNewDisciple+"', cycleid = "+k+" where iduser = "+id+" and name = '"+select.disciple+"'");
+              data.Query("Update dnamedic  set name = '"+updNewDisciple+"', cycleid = "+k+" where code = "+select[0].idSpec);
                FacesContext context = FacesContext.getCurrentInstance();
               context.addMessage(null, new FacesMessage("Удачно!", "Дисциплина обновлена"));
                String test = download();//Обновление списка это нихера не тест не удалять.
            } catch (Exception ex) {
            }
-       }else{
+      // }else{
         
-       }
+      // }
    } 
    public void clear(){
    addNewDisciple = "";
@@ -140,11 +149,29 @@ public class SpecialityDataBean implements Serializable {
         return "SpecialityData?faces-redirect=true";
     }
     public void update(){
-            updNewDisciple = select.disciple;
-            cycleUPD = select.cycle;
+        if(select.length>0){
+            updNewDisciple = select[0].disciple;
+            cycleUPD = select[0].cycle;
+        }else{
+             FacesContext context = FacesContext.getCurrentInstance();
+             context.addMessage(null, new FacesMessage("Fail", "Нельзя редактировать несколько дисциплин одновременно"));
+        }
     }
     public SpecialityDataBean() throws ClassNotFoundException, SQLException{
         this.data = new DataBaseConnector();
     }
-    
+    public void duplicate()
+    {
+      
+           try {
+               for(SpecialityData spec:select){
+               data.Query("Insert into dnamedic (name,iduser,cycleid) values ('"+spec.disciple+"',"+id+","+data.getInformationAboutIdCycleByname(spec.cycle, id)+") ");
+               }
+               String test = download();//Обновление списка это нихера не тест не удалять.
+              FacesContext context = FacesContext.getCurrentInstance();
+              context.addMessage(null, new FacesMessage("Удачно!", "Дублирование завершено")); 
+           } catch (Exception ex) {
+           }
+      
+    }
 }

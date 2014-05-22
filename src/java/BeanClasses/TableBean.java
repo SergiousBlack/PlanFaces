@@ -1,8 +1,13 @@
+package BeanClasses;
 
+
+import DataBase.DataBaseConnector;
+import DataClasses.Car;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -12,7 +17,15 @@ import javax.servlet.http.HttpSession;
 @ManagedBean
 @SessionScoped
 public class TableBean implements Serializable {
+    private boolean isSelect;
 
+    public boolean isIsSelect() {
+        return isSelect;
+    }
+
+    public void setIsSelect(boolean isSelect) {
+        this.isSelect = isSelect;
+    }
     private String eduForm;
     private String gzdata;
     private String OKR;
@@ -213,7 +226,7 @@ public class TableBean implements Serializable {
         years[5] = "Шестой";
         years[6] = "Седьмой";
     }
-    private static List<String> types;
+    public  List<String> types;
 
     public List<String> getTypes() {
         return types;
@@ -230,7 +243,7 @@ public class TableBean implements Serializable {
 
     public TableBean() throws ClassNotFoundException, SQLException {
         this.conn = new DataBaseConnector();
-        types = conn.getList();
+        types = conn.getListLegendic();
         eduForms.add("Дистанційна");
         eduForms.add("Денна");
         eduForms.add("Заочна");
@@ -253,31 +266,146 @@ public class TableBean implements Serializable {
     }
 
     public void clearPannels() {
+        types = conn.getListLegendic();
         eduForms.clear();
+        selectedCycle = "";
         galuzData.clear();
         naprav.clear();
         cycle = conn.getCycle(id);
         okr.clear();
         specList.clear();
         specializationList.clear();
-        //eduForms.add(" ");
         eduForms.add("Дистанційна");
         eduForms.add("Денна");
         eduForms.add("Заочна");
     }
 
-    public void Clear() {
+    public void clear() {
+        types = conn.getListLegendic();
         plans.clear();
         i = 0;
     }
     
+    public int otI;
+
+    public int getOtI() {
+        return otI;
+    }
+
+    public void setOtI(int otI) {
+        this.otI = otI;
+    }
+
+    public int getDoI() {
+        return doI;
+    }
+
+    public void setDoI(int doI) {
+        this.doI = doI;
+    }
+    public int doI;
     
+    public String selectedSelectinSelection;
+
+    public String getSelectedSelectinSelection() {
+        return selectedSelectinSelection;
+    }
+
+    public void setSelectedSelectinSelection(String selectedSelectinSelection) {
+        this.selectedSelectinSelection = selectedSelectinSelection;
+    }
+    public int weekDO;
+
+    public int getWeekDO() {
+        return weekDO;
+    }
+
+    public void setWeekDO(int weekDO) {
+        this.weekDO = weekDO;
+    }
     
-    
+    public void seArray()
+    {
+        if(otI<doI && weekDO!=0&&otI>0&&doI>0&&plans.size()>0&&plans.size() >= weekDO-1){
+            
+           Car edt = plans.get(weekDO-1);
+           
+            
+            for(int g = otI;g<doI+1;g++){
+                                                     //Андрей Александрович если вы это видите я не виноват так нужно было...                           
+                switch(g){
+                    case 1: edt.setWeek1(selectedSelectinSelection); break;
+                    case 2: edt.setWeek2(selectedSelectinSelection); break;   
+                    case 3: edt.setWeek3(selectedSelectinSelection); break;
+                    case 4: edt.setWeek4(selectedSelectinSelection); break;
+                    case 5: edt.setWeek5(selectedSelectinSelection); break;    
+                    case 6: edt.setWeek6(selectedSelectinSelection); break;    
+                    case 7: edt.setWeek7(selectedSelectinSelection); break;   
+                    case 8: edt.setWeek8(selectedSelectinSelection); break;    
+                    case 9: edt.setWeek9(selectedSelectinSelection); break;
+                    case 10: edt.setWeek10(selectedSelectinSelection); break;   
+                    case 11: edt.setWeek11(selectedSelectinSelection); break;
+                    case 12: edt.setWeek12(selectedSelectinSelection); break;
+                    case 13: edt.setWeek13(selectedSelectinSelection); break;    
+                    case 14: edt.setWeek14(selectedSelectinSelection); break;    
+                    case 15: edt.setWeek15(selectedSelectinSelection); break;   
+                    case 16: edt.setWeek16(selectedSelectinSelection); break;    
+                    case 17: edt.setWeek17(selectedSelectinSelection); break;
+                    case 18: edt.setWeek18(selectedSelectinSelection); break;   
+                    case 19: edt.setWeek19(selectedSelectinSelection); break;
+                    case 20: edt.setWeek20(selectedSelectinSelection); break;
+                    case 21: edt.setWeek21(selectedSelectinSelection); break;    
+                    case 22: edt.setWeek22(selectedSelectinSelection); break;    
+                    case 23: edt.setWeek23(selectedSelectinSelection); break;   
+                    case 24: edt.setWeek24(selectedSelectinSelection); break;    
+                    case 25: edt.setWeek25(selectedSelectinSelection); break;
+                    case 26: edt.setWeek26(selectedSelectinSelection); break;   
+                    case 27: edt.setWeek27(selectedSelectinSelection); break;
+                    case 28: edt.setWeek28(selectedSelectinSelection); break;
+                    case 29: edt.setWeek29(selectedSelectinSelection); break;    
+                    case 30: edt.setWeek30(selectedSelectinSelection); break;    
+                    case 31: edt.setWeek31(selectedSelectinSelection); break;   
+                    case 32: edt.setWeek32(selectedSelectinSelection); break;    
+                    case 33: edt.setWeek33(selectedSelectinSelection); break;
+                    case 34: edt.setWeek34(selectedSelectinSelection); break;   
+                    case 35: edt.setWeek35(selectedSelectinSelection); break;
+                    case 36: edt.setWeek36(selectedSelectinSelection); break;
+                    case 37: edt.setWeek37(selectedSelectinSelection); break;    
+                    case 38: edt.setWeek38(selectedSelectinSelection); break;    
+                    case 39: edt.setWeek39(selectedSelectinSelection); break;   
+                    case 40: edt.setWeek40(selectedSelectinSelection); break;   
+                    case 41: edt.setWeek41(selectedSelectinSelection); break;
+                    case 42: edt.setWeek42(selectedSelectinSelection); break;   
+                    case 43: edt.setWeek43(selectedSelectinSelection); break;
+                    case 44: edt.setWeek44(selectedSelectinSelection); break;
+                    case 45: edt.setWeek45(selectedSelectinSelection); break;    
+                    case 46: edt.setWeek46(selectedSelectinSelection); break;    
+                    case 47: edt.setWeek47(selectedSelectinSelection); break;   
+                    case 48: edt.setWeek48(selectedSelectinSelection); break;  
+                    case 49: edt.setWeek49(selectedSelectinSelection); break;
+                    case 50: edt.setWeek50(selectedSelectinSelection); break;   
+                    case 51: edt.setWeek51(selectedSelectinSelection); break;
+                    case 52: edt.setWeek52(selectedSelectinSelection); break;
+                    case 53: edt.setWeek53(selectedSelectinSelection); break;    
+                    
+                }
+                
+                
+                
+            }
+            
+            plans.set(weekDO-1, edt);
+            FacesContext context = FacesContext.getCurrentInstance();
+              context.addMessage(null, new FacesMessage("БАБАМ", "ТЫДЫЩъ"));  
+        }else{
+           FacesContext context = FacesContext.getCurrentInstance();
+              context.addMessage(null, new FacesMessage("Ошибка", "Не удалось произвести подстановку"));  
+        }
+    }
 
     public void saveToBase() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        String Text = date + "_" + OKR + "_" + eduForm + "_" + napr + "_" + spec + "_" + specialization;
-        conn.Query("Insert Into Plan (text,userid) Values ('" + Text + "'," + id + ") ");
+    
+        conn.Query("Insert Into Plan (date,okr,eduform,napr,spec,specialization,userid) Values ('" + date + "','" + OKR + "','" + eduForm + "','" + napr + "','" + spec + "','" + specialization + "'," + id + ") ");
         int ID = conn.getMaxSize();
         for (int i = 0; i < plans.size(); i++) {
             conn.Query("Insert Into PlanValues (course,week,value,idPlan) values (" + (i + 1) + "," + 1 + ", '" + plans.get(i).getWeek1() + "' ," + ID + ")");
@@ -334,5 +462,8 @@ public class TableBean implements Serializable {
             conn.Query("Insert Into PlanValues (course,week,value,idPlan) values (" + (i + 1) + "," + 52 + ", '" + plans.get(i).getWeek52() + "' ," + ID + ")");
             conn.Query("Insert Into PlanValues (course,week,value,idPlan) values (" + (i + 1) + "," + 53 + ", '" + plans.get(i).getWeek53() + "' ," + ID + ")");
         }
+        FacesContext context = FacesContext.getCurrentInstance();
+              context.addMessage(null, new FacesMessage("Удачно!", "План успешно сохранен и появился в списке")); 
+              eduForm="";
     }
 }
