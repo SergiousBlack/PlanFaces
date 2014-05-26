@@ -10,6 +10,7 @@ import DataBase.DataBaseConnector;
 import DataClasses.GraphValue;
 import DataClasses.newGraph;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class GraphBean  implements Serializable{
     public List<String> coursesList = new ArrayList<String>();
     public List<String> SemestersList = new ArrayList<String>();
     public List<String> reductionList = new ArrayList<String>();
-
+   
     public List<String> getReductionList() {
         return reductionList;
     }
@@ -139,7 +140,9 @@ public class GraphBean  implements Serializable{
           if(mainList.get(i).value10.end!=null &&mainList.get(i).value10.end.getTime() > mainList.get(i).end.getTime()){
               mainList.get(i).end = mainList.get(i).value10.end;
           } 
+          
        }
+     
     }
     
     
@@ -155,9 +158,14 @@ public class GraphBean  implements Serializable{
         }
     }
 
-    public void save(){
+    public String save() throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException{
+         data.Query("Insert Into Plan (date,okr,eduform,napr,spec,specialization,userid) Values ('" + admin.date + "','" + admin.getOKR() + "','" + admin.getEduForm() + "','" + admin.getNapr() + "','" + admin.getSpec() + "','" + admin.getSpecialization() + "'," + admin.getId() + ")");
+         int ID = data.getMaxSize();
         
+         for(int i = 0;i<mainList.size();i++){
+             data.Query("Insert Into ");
+         }
         
-        
+         return "index.xhtml?faces-redirect=true;";
     }
 }
