@@ -58,7 +58,7 @@
                        
                 <p:column headerText="Начало с" style="width: 100px" >  
                <p:cellEditor>  
-                   <f:facet name="output"><h:outputText value="#{car.start}" ><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText><br/><h:outputLabel value ="До: #{car.end}"><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputLabel></f:facet>
+                   <f:facet name="output"><h:outputText value="#{car.start}" ><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText><br/><h:outputText value="#{car.end}" ><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText></f:facet>
                 <f:facet name="input">
                     <p:calendar value="#{car.start}" pattern="dd-MM-yyyy" />
                 </f:facet>

@@ -81,6 +81,12 @@ public class newGraph implements Serializable{
     }
 
     public Date getEnd() {
+        if(end!=null){
+        Calendar f = Calendar.getInstance();
+        f.setTime(end);
+        f.add(Calendar.DATE, 1); 
+        end = f.getTime();
+        }
         return end;
     }
 

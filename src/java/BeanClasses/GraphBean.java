@@ -11,6 +11,7 @@ import DataClasses.GraphValue;
 import DataClasses.newGraph;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -104,9 +105,41 @@ public class GraphBean  implements Serializable{
     
     
     public void tableCellEdit(CellEditEvent e){
-        for(int i = 0; i < mainList.size(); i++){
-            
-        }
+       for(int i = 0;i<mainList.size();i++){
+           
+          mainList.get(i).end = mainList.get(i).start;
+          
+          if( mainList.get(i).value1.end!=null && mainList.get(i).value1.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value1.end;
+          }
+          if( mainList.get(i).value2.end!=null && mainList.get(i).value2.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value2.end;
+          } 
+          if(mainList.get(i).value3.end!=null && mainList.get(i).value3.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value3.end;
+          } 
+          if(mainList.get(i).value4.end!=null&&mainList.get(i).value4.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value4.end;
+          } 
+          if(mainList.get(i).value5.end!=null && mainList.get(i).value5.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value5.end;
+          } 
+          if(mainList.get(i).value6.end!=null &&mainList.get(i).value6.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value6.end;
+          } 
+          if(mainList.get(i).value7.end!=null &&mainList.get(i).value7.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value7.end;
+          } 
+          if(mainList.get(i).value8.end!=null &&mainList.get(i).value8.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value8.end;
+          } 
+          if(mainList.get(i).value9.end!=null &&mainList.get(i).value9.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value9.end;
+          } 
+          if(mainList.get(i).value10.end!=null &&mainList.get(i).value10.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value10.end;
+          } 
+       }
     }
     
     
@@ -124,7 +157,7 @@ public class GraphBean  implements Serializable{
 
     public void save(){
         
-        String save = "";
+        
         
     }
 }
