@@ -378,6 +378,16 @@ public class DataBaseConnector  implements Serializable{
                 return res.getInt(1);}
             else return 0;
    }
+   
+    public int getMaxSizeGraphValues() throws SQLException, ClassNotFoundException,InstantiationException,IllegalAccessException{
+       
+            Statement stat = conn.createStatement();
+            ResultSet res = stat.executeQuery("SELECT * FROM  NewGraphValues ORDER BY  NewGraphValues.idValue DESC "); // выполняем запрос
+            if(res.next()){
+                return res.getInt(1);}
+            else return 0;
+   }
+   
    public int getMaxSizeS() throws SQLException, ClassNotFoundException,InstantiationException,IllegalAccessException{
        
             Statement stat = conn.createStatement();
