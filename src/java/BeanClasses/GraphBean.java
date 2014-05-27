@@ -13,7 +13,6 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -167,37 +166,86 @@ public class GraphBean  implements Serializable{
              String sql = "Insert Into NewGraphValues (course,semestr,startd,endd,idgraph) values ('"+mainList.get(i).course+"','"+mainList.get(i).semestr+"','"+dateFormat.format(mainList.get(i).start)+"','"+dateFormat.format(mainList.get(i).end)+"',"+ID+")  ";
              data.Query(sql);
              int idValue = data.getMaxSizeGraphValues();
-           
-             if(mainList.get(i).value1!=null){
-                 
-                 data.Query("Insert Into NewGraphValuesByPoints (start,end,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value1.start)+"','"+dateFormat.format(mainList.get(i).value1.end)+"',"+mainList.get(i).value1.count+","+mainList.get(i).value1.dayWalker+","+idValue+",'"+mainList.get(i).value1.type+"') ");
+            int walk = 0;
+             if(mainList.get(i).value1.end!=null){
+                 if(mainList.get(i).value1.dayWalker){
+                     walk = 1;
+                 }else{
+                     walk = 0;
+                 }
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value1.start)+"','"+dateFormat.format(mainList.get(i).value1.end)+"',"+mainList.get(i).value1.count+","+walk+","+idValue+",'"+mainList.get(i).value1.type+"') ");
              }
-             if(mainList.get(i).value2!=null){
-                 data.Query("Insert Into NewGraphValuesByPoints (start,end,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value2.start)+"','"+dateFormat.format(mainList.get(i).value2.end)+"',"+mainList.get(i).value2.count+","+mainList.get(i).value2.dayWalker+","+idValue+",'"+mainList.get(i).value2.type+"') ");
+             if(mainList.get(i).value2.end!=null){
+                  if(mainList.get(i).value2.dayWalker){
+                     walk = 1;
+                 }else{
+                     walk = 0;
+                 }
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value2.start)+"','"+dateFormat.format(mainList.get(i).value2.end)+"',"+mainList.get(i).value2.count+","+walk+","+idValue+",'"+mainList.get(i).value2.type+"') ");
              }
-             if(mainList.get(i).value3!=null){
-                 data.Query("Insert Into NewGraphValuesByPoints (start,end,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value3.start)+"','"+dateFormat.format(mainList.get(i).value3.end)+"',"+mainList.get(i).value3.count+","+mainList.get(i).value3.dayWalker+","+idValue+",'"+mainList.get(i).value3.type+"') ");
+             if(mainList.get(i).value3.end!=null){
+                  if(mainList.get(i).value3.dayWalker){
+                     walk = 1;
+                 }else{
+                     walk = 0;
+                 }
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value3.start)+"','"+dateFormat.format(mainList.get(i).value3.end)+"',"+mainList.get(i).value3.count+","+walk+","+idValue+",'"+mainList.get(i).value3.type+"') ");
              }
-             if(mainList.get(i).value4!=null){
-                 data.Query("Insert Into NewGraphValuesByPoints (start,end,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value4.start)+"','"+dateFormat.format(mainList.get(i).value4.end)+"',"+mainList.get(i).value4.count+","+mainList.get(i).value4.dayWalker+","+idValue+",'"+mainList.get(i).value4.type+"') ");
+             if(mainList.get(i).value4.end!=null){
+                  if(mainList.get(i).value4.dayWalker){
+                     walk = 1;
+                 }else{
+                     walk = 0;
+                 }
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value4.start)+"','"+dateFormat.format(mainList.get(i).value4.end)+"',"+mainList.get(i).value4.count+","+walk+","+idValue+",'"+mainList.get(i).value4.type+"') ");
              }
-             if(mainList.get(i).value5!=null){
-                 data.Query("Insert Into NewGraphValuesByPoints (start,end,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value5.start)+"','"+dateFormat.format(mainList.get(i).value5.end)+"',"+mainList.get(i).value5.count+","+mainList.get(i).value5.dayWalker+","+idValue+",'"+mainList.get(i).value5.type+"') ");
+             if(mainList.get(i).value5.end!=null){
+                  if(mainList.get(i).value5.dayWalker){
+                     walk = 1;
+                 }else{
+                     walk = 0;
+                 }
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value5.start)+"','"+dateFormat.format(mainList.get(i).value5.end)+"',"+mainList.get(i).value5.count+","+walk+","+idValue+",'"+mainList.get(i).value5.type+"') ");
              }
-             if(mainList.get(i).value6!=null){
-                 data.Query("Insert Into NewGraphValuesByPoints (start,end,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value6.start)+"','"+dateFormat.format(mainList.get(i).value6.end)+"',"+mainList.get(i).value6.count+","+mainList.get(i).value6.dayWalker+","+idValue+",'"+mainList.get(i).value6.type+"') ");
+             if(mainList.get(i).value6.end!=null){
+                  if(mainList.get(i).value6.dayWalker){
+                     walk = 1;
+                 }else{
+                     walk = 0;
+                 }
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value6.start)+"','"+dateFormat.format(mainList.get(i).value6.end)+"',"+mainList.get(i).value6.count+","+walk+","+idValue+",'"+mainList.get(i).value6.type+"') ");
              }
-             if(mainList.get(i).value7!=null){
-                 data.Query("Insert Into NewGraphValuesByPoints (start,end,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value7.start)+"','"+dateFormat.format(mainList.get(i).value7.end)+"',"+mainList.get(i).value7.count+","+mainList.get(i).value7.dayWalker+","+idValue+",'"+mainList.get(i).value7.type+"') ");
+             if(mainList.get(i).value7.end!=null){
+                  if(mainList.get(i).value7.dayWalker){
+                     walk = 1;
+                 }else{
+                     walk = 0;
+                 }
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value7.start)+"','"+dateFormat.format(mainList.get(i).value7.end)+"',"+mainList.get(i).value7.count+","+walk+","+idValue+",'"+mainList.get(i).value7.type+"') ");
              }
-             if(mainList.get(i).value8!=null){
-                 data.Query("Insert Into NewGraphValuesByPoints (start,end,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value8.start)+"','"+dateFormat.format(mainList.get(i).value8.end)+"',"+mainList.get(i).value8.count+","+mainList.get(i).value8.dayWalker+","+idValue+",'"+mainList.get(i).value8.type+"') ");
+             if(mainList.get(i).value8.end!=null){
+                  if(mainList.get(i).value8.dayWalker){
+                     walk = 1;
+                 }else{
+                     walk = 0;
+                 }
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value8.start)+"','"+dateFormat.format(mainList.get(i).value8.end)+"',"+mainList.get(i).value8.count+","+walk+","+idValue+",'"+mainList.get(i).value8.type+"') ");
              }
-             if(mainList.get(i).value9!=null){
-                 data.Query("Insert Into NewGraphValuesByPoints (start,end,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value9.start)+"','"+dateFormat.format(mainList.get(i).value9.end)+"',"+mainList.get(i).value9.count+","+mainList.get(i).value9.dayWalker+","+idValue+",'"+mainList.get(i).value9.type+"') ");
+             if(mainList.get(i).value9.end!=null){
+                  if(mainList.get(i).value9.dayWalker){
+                     walk = 1;
+                 }else{
+                     walk = 0;
+                 }
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value9.start)+"','"+dateFormat.format(mainList.get(i).value9.end)+"',"+mainList.get(i).value9.count+","+walk+","+idValue+",'"+mainList.get(i).value9.type+"') ");
              }
-             if(mainList.get(i).value10!=null){
-                data.Query("Insert Into NewGraphValuesByPoints (start,end,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value10.start)+"','"+dateFormat.format(mainList.get(i).value10.end)+"',"+mainList.get(i).value10.count+","+mainList.get(i).value10.dayWalker+","+idValue+",'"+mainList.get(i).value10.type+"') "); 
+             if(mainList.get(i).value10.end!=null){
+                  if(mainList.get(i).value10.dayWalker){
+                     walk = 1;
+                 }else{
+                     walk = 0;
+                 }
+                data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value10.start)+"','"+dateFormat.format(mainList.get(i).value10.end)+"',"+mainList.get(i).value10.count+","+walk+","+idValue+",'"+mainList.get(i).value10.type+"') "); 
              }
              
          }
