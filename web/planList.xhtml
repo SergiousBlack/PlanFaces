@@ -13,8 +13,8 @@
         <ui:include src="MainMenu.xhtml" />
    <ui:include src="SelectFormForPlan.xhtml"/>
   <h:form id="form">
-      <p:dataTable id="cars" var="planitem" value="#{planlist.carsSmall}" rowKey="#{planitem.idplan}"
-                   emptyMessage="Планов нет" selection="#{planlist.selectedCar}" selectionMode="single" scrollable="true" scrollHeight="500">
+      <p:dataTable id="cars" var="planitem" value="#{planListNew.carsSmall}" rowKey="#{planitem.idplan}"
+                   emptyMessage="Планов нет" selection="#{planListNew.selectedCar}" selectionMode="single" scrollable="true" scrollHeight="500">
           
           <p:column  headerText="Номер плана" style="width: 6%" >
                 #{planitem.idplan}
@@ -23,10 +23,10 @@
           <p:column  headerText="Дата" style="width: 10%; text-align: center" >
                 #{planitem.date}
         </p:column>
-          <p:column headerText="ОКР" filterMatchMode="exact" filterBy="OKR" filterOptions="#{planlist.okrlist}" style="width:10%; text-align: center">
+          <p:column headerText="ОКР" filterMatchMode="exact" filterBy="OKR" filterOptions="#{planListNew.okrlist}" style="width:10%; text-align: center">
                 #{planitem.OKR}
         </p:column>
-          <p:column  headerText="Форма обучения" filterMatchMode="exact" filterBy="eduform" filterOptions="#{planlist.formedulist}">
+          <p:column  headerText="Форма обучения" filterMatchMode="exact" filterBy="eduform" filterOptions="#{planListNew.formedulist}">
                 #{planitem.eduform}
         </p:column>
            <p:column headerText="Направление" >
@@ -41,8 +41,8 @@
        
           
         <f:facet name="footer">
-            <p:commandButton id="viewButton" value="Просмотр" icon="ui-icon-search" action="SeePlan.xhtml?faces-redirect=true" actionListener="#{planlist.downloadData()}"/>
-            <p:commandButton id="drop" value="Удалить план" update=":form:cars" action="#{planlist.deleteplan()}" />
+            <p:commandButton id="viewButton" value="Просмотр" icon="ui-icon-search" action="SeeNewGraph.xhtml?faces-redirect=true" actionListener="#{planListNew.downloadData()}"/>
+            <p:commandButton id="drop" value="Удалить план" update=":form:cars" action="#{planListNew.deleteplan()}" />
         </f:facet>
                 
     </p:dataTable>
