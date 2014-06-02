@@ -159,9 +159,9 @@ public class GraphBean  implements Serializable{
     }
 
     public String save() throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException{
-         data.Query("Insert Into Plan (date,okr,eduform,napr,spec,specialization,userid) Values ('" + admin.date + "','" + admin.getOKR() + "','" + admin.getEduForm() + "','" + admin.getNapr() + "','" + admin.getSpec() + "','" + admin.getSpecialization() + "'," + admin.getId() + ")");
-         int ID = data.getMaxSize();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        data.Query("Insert Into Plan (date,okr,eduform,napr,spec,specialization,userid) Values ('" + admin.date + "','" + admin.getOKR() + "','" + admin.getEduForm() + "','" + admin.getNapr() + "','" + admin.getSpec() + "','" + admin.getSpecialization() + "'," + admin.getId() + ")");
+        int ID = data.getMaxSize();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
          for(int i = 0;i<mainList.size();i++){
              String sql = "Insert Into NewGraphValues (course,semestr,startd,endd,idgraph) values ('"+mainList.get(i).course+"','"+mainList.get(i).semestr+"','"+dateFormat.format(mainList.get(i).start)+"','"+dateFormat.format(mainList.get(i).end)+"',"+ID+")  ";
              data.Query(sql);
@@ -173,7 +173,7 @@ public class GraphBean  implements Serializable{
                  }else{
                      walk = 0;
                  }
-                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value1.start)+"','"+dateFormat.format(mainList.get(i).value1.end)+"',"+mainList.get(i).value1.count+","+walk+","+idValue+",'"+mainList.get(i).value1.type+"') ");
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type,position) values ('"+dateFormat.format(mainList.get(i).value1.start)+"','"+dateFormat.format(mainList.get(i).value1.end)+"',"+mainList.get(i).value1.count+","+walk+","+idValue+",'"+mainList.get(i).value1.type+"', 1) ");
              }
              if(mainList.get(i).value2.end!=null){
                   if(mainList.get(i).value2.dayWalker){
@@ -181,7 +181,7 @@ public class GraphBean  implements Serializable{
                  }else{
                      walk = 0;
                  }
-                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value2.start)+"','"+dateFormat.format(mainList.get(i).value2.end)+"',"+mainList.get(i).value2.count+","+walk+","+idValue+",'"+mainList.get(i).value2.type+"') ");
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type,position) values ('"+dateFormat.format(mainList.get(i).value2.start)+"','"+dateFormat.format(mainList.get(i).value2.end)+"',"+mainList.get(i).value2.count+","+walk+","+idValue+",'"+mainList.get(i).value2.type+"',2) ");
              }
              if(mainList.get(i).value3.end!=null){
                   if(mainList.get(i).value3.dayWalker){
@@ -189,7 +189,7 @@ public class GraphBean  implements Serializable{
                  }else{
                      walk = 0;
                  }
-                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value3.start)+"','"+dateFormat.format(mainList.get(i).value3.end)+"',"+mainList.get(i).value3.count+","+walk+","+idValue+",'"+mainList.get(i).value3.type+"') ");
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type,position) values ('"+dateFormat.format(mainList.get(i).value3.start)+"','"+dateFormat.format(mainList.get(i).value3.end)+"',"+mainList.get(i).value3.count+","+walk+","+idValue+",'"+mainList.get(i).value3.type+"',3) ");
              }
              if(mainList.get(i).value4.end!=null){
                   if(mainList.get(i).value4.dayWalker){
@@ -197,7 +197,7 @@ public class GraphBean  implements Serializable{
                  }else{
                      walk = 0;
                  }
-                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value4.start)+"','"+dateFormat.format(mainList.get(i).value4.end)+"',"+mainList.get(i).value4.count+","+walk+","+idValue+",'"+mainList.get(i).value4.type+"') ");
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type,position) values ('"+dateFormat.format(mainList.get(i).value4.start)+"','"+dateFormat.format(mainList.get(i).value4.end)+"',"+mainList.get(i).value4.count+","+walk+","+idValue+",'"+mainList.get(i).value4.type+"',4) ");
              }
              if(mainList.get(i).value5.end!=null){
                   if(mainList.get(i).value5.dayWalker){
@@ -205,7 +205,7 @@ public class GraphBean  implements Serializable{
                  }else{
                      walk = 0;
                  }
-                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value5.start)+"','"+dateFormat.format(mainList.get(i).value5.end)+"',"+mainList.get(i).value5.count+","+walk+","+idValue+",'"+mainList.get(i).value5.type+"') ");
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type,position) values ('"+dateFormat.format(mainList.get(i).value5.start)+"','"+dateFormat.format(mainList.get(i).value5.end)+"',"+mainList.get(i).value5.count+","+walk+","+idValue+",'"+mainList.get(i).value5.type+"',5) ");
              }
              if(mainList.get(i).value6.end!=null){
                   if(mainList.get(i).value6.dayWalker){
@@ -213,7 +213,7 @@ public class GraphBean  implements Serializable{
                  }else{
                      walk = 0;
                  }
-                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value6.start)+"','"+dateFormat.format(mainList.get(i).value6.end)+"',"+mainList.get(i).value6.count+","+walk+","+idValue+",'"+mainList.get(i).value6.type+"') ");
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type,position) values ('"+dateFormat.format(mainList.get(i).value6.start)+"','"+dateFormat.format(mainList.get(i).value6.end)+"',"+mainList.get(i).value6.count+","+walk+","+idValue+",'"+mainList.get(i).value6.type+"',6) ");
              }
              if(mainList.get(i).value7.end!=null){
                   if(mainList.get(i).value7.dayWalker){
@@ -221,7 +221,7 @@ public class GraphBean  implements Serializable{
                  }else{
                      walk = 0;
                  }
-                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value7.start)+"','"+dateFormat.format(mainList.get(i).value7.end)+"',"+mainList.get(i).value7.count+","+walk+","+idValue+",'"+mainList.get(i).value7.type+"') ");
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type,position) values ('"+dateFormat.format(mainList.get(i).value7.start)+"','"+dateFormat.format(mainList.get(i).value7.end)+"',"+mainList.get(i).value7.count+","+walk+","+idValue+",'"+mainList.get(i).value7.type+"',7) ");
              }
              if(mainList.get(i).value8.end!=null){
                   if(mainList.get(i).value8.dayWalker){
@@ -229,7 +229,7 @@ public class GraphBean  implements Serializable{
                  }else{
                      walk = 0;
                  }
-                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value8.start)+"','"+dateFormat.format(mainList.get(i).value8.end)+"',"+mainList.get(i).value8.count+","+walk+","+idValue+",'"+mainList.get(i).value8.type+"') ");
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type,position) values ('"+dateFormat.format(mainList.get(i).value8.start)+"','"+dateFormat.format(mainList.get(i).value8.end)+"',"+mainList.get(i).value8.count+","+walk+","+idValue+",'"+mainList.get(i).value8.type+"',8) ");
              }
              if(mainList.get(i).value9.end!=null){
                   if(mainList.get(i).value9.dayWalker){
@@ -237,7 +237,7 @@ public class GraphBean  implements Serializable{
                  }else{
                      walk = 0;
                  }
-                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value9.start)+"','"+dateFormat.format(mainList.get(i).value9.end)+"',"+mainList.get(i).value9.count+","+walk+","+idValue+",'"+mainList.get(i).value9.type+"') ");
+                 data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type,position) values ('"+dateFormat.format(mainList.get(i).value9.start)+"','"+dateFormat.format(mainList.get(i).value9.end)+"',"+mainList.get(i).value9.count+","+walk+","+idValue+",'"+mainList.get(i).value9.type+"',9) ");
              }
              if(mainList.get(i).value10.end!=null){
                   if(mainList.get(i).value10.dayWalker){
@@ -245,7 +245,7 @@ public class GraphBean  implements Serializable{
                  }else{
                      walk = 0;
                  }
-                data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type) values ('"+dateFormat.format(mainList.get(i).value10.start)+"','"+dateFormat.format(mainList.get(i).value10.end)+"',"+mainList.get(i).value10.count+","+walk+","+idValue+",'"+mainList.get(i).value10.type+"') "); 
+                data.Query("Insert Into NewGraphValuesByPoints (startd,endd,count,dayWalker,idvalue,type,position) values ('"+dateFormat.format(mainList.get(i).value10.start)+"','"+dateFormat.format(mainList.get(i).value10.end)+"',"+mainList.get(i).value10.count+","+walk+","+idValue+",'"+mainList.get(i).value10.type+"',10) "); 
              }
              
          }

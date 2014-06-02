@@ -20,6 +20,24 @@ import org.joda.time.Period;
 @ManagedBean
 public class GraphValue implements Serializable{
    
+    public int idGraph;   
+
+    public int getIdGraph() {
+        return idGraph;
+    }
+
+    public void setIdGraph(int idGraph) {
+        this.idGraph = idGraph;
+    }
+
+    public GraphValue(int idGraph, Date start, Date end, String type, int count, boolean dayWalker) {
+        this.idGraph = idGraph;
+        this.start = start;
+        this.end = end;
+        this.type = type;
+        this.count = count;
+        this.dayWalker = dayWalker;
+    }
     public Date start;
     public Date end;
     public String type;

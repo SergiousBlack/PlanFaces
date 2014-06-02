@@ -18,6 +18,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class newGraph implements Serializable{
     
+    public int id;
     public String course;
     public String semestr;
     public Date start;
@@ -33,6 +34,33 @@ public class newGraph implements Serializable{
     public GraphValue value9;
     public GraphValue value10;
 
+    public newGraph(int id, String course, String semestr, Date start, Date end, GraphValue value1, GraphValue value2, GraphValue value3, GraphValue value4, GraphValue value5, GraphValue value6, GraphValue value7, GraphValue value8, GraphValue value9, GraphValue value10) {
+        this.id = id;
+        this.course = course;
+        this.semestr = semestr;
+        this.start = start;
+        this.end = end;
+        this.value1 = value1;
+        this.value2 = value2;
+        this.value3 = value3;
+        this.value4 = value4;
+        this.value5 = value5;
+        this.value6 = value6;
+        this.value7 = value7;
+        this.value8 = value8;
+        this.value9 = value9;
+        this.value10 = value10;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public String getCourse() {
         return course;
     }

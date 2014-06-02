@@ -3,7 +3,9 @@ package BeanClasses;
 import DataBase.DataBaseConnector;
 import DataClasses.PlanValuesFromBase;
 import DataClasses.Car;
+import DataClasses.GraphValue;
 import DataClasses.Plan;
+import DataClasses.newGraph;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import org.primefaces.event.CellEditEvent;
 
 @ManagedBean
 @SessionScoped
@@ -22,6 +25,46 @@ public class PlanListNew implements Serializable{
         private List<Plan> filteredCars;
         private SelectItem[] formedulist;
         private SelectItem[] okrlist;
+         public List<newGraph> mainList = new ArrayList<newGraph>();
+public List<String> coursesList = new ArrayList<String>();
+    public List<String> SemestersList = new ArrayList<String>();
+    public List<String> reductionList = new ArrayList<String>();
+   
+    public List<String> getReductionList() {
+        return reductionList;
+    }
+
+    public void setReductionList(List<String> reductionList) {
+        this.reductionList = reductionList;
+    }
+    
+
+    public List<String> getSemestersList() {
+        return SemestersList;
+    }
+
+    public void setSemestersList(List<String> SemestersList) {
+        this.SemestersList = SemestersList;
+    }
+    
+    public List<String> getCoursesList() {
+        return coursesList;
+    }
+
+    public void setCoursesList(List<String> coursesList) {
+        this.coursesList = coursesList;
+    }
+    public String test;
+    public boolean DayOrNight;
+    
+    public List<newGraph> getMainList() {
+        return mainList;
+    }
+
+    public void setMainList(List<newGraph> mainList) {
+        this.mainList = mainList;
+    }
+         
     public List<Plan> getFilteredCars() {
         return filteredCars;
     }
@@ -57,6 +100,7 @@ public class PlanListNew implements Serializable{
         this.admin = messageBean;
         id = Integer.toString(messageBean.getAdminid());
 	}
+    
     public List<Car> getPlans() {
         return plans;
     }
@@ -82,15 +126,9 @@ public class PlanListNew implements Serializable{
         this.selectedCar = selectedCar;
     }
         public void downloadData() throws SQLException{
-           List<PlanValuesFromBase> list = data.SelectPlanData(selectedCar,id);
-           Car x;
-           plans.clear();
-           int g = 0;
-           for(int i = 0;i<list.size()/53;i++){
-               x = new Car(list.get(g).Course,list.get(g).Value,list.get(g+1).Value,list.get(g+2).Value,list.get(g+3).Value,list.get(g+4).Value,list.get(g+5).Value,list.get(g+6).Value,list.get(g+7).Value,list.get(g+8).Value,list.get(g+9).Value,list.get(g+10).Value,list.get(g+11).Value,list.get(g+12).Value,list.get(g+13).Value,list.get(g+14).Value,list.get(g+15).Value,list.get(g+16).Value,list.get(g+17).Value,list.get(g+18).Value,list.get(g+19).Value,list.get(g+20).Value,list.get(g+21).Value,list.get(g+22).Value,list.get(g+23).Value,list.get(g+24).Value,list.get(g+25).Value,list.get(g+26).Value,list.get(g+27).Value,list.get(g+28).Value,list.get(g+29).Value,list.get(g+30).Value,list.get(g+31).Value,list.get(g+32).Value,list.get(g+33).Value,list.get(g+34).Value,list.get(g+35).Value,list.get(g+36).Value,list.get(g+37).Value,list.get(g+38).Value,list.get(g+39).Value,list.get(g+40).Value,list.get(g+41).Value,list.get(g+42).Value,list.get(g+43).Value,list.get(g+44).Value,list.get(g+45).Value,list.get(g+46).Value,list.get(g+47).Value,list.get(g+48).Value,list.get(g+49).Value,list.get(g+50).Value,list.get(g+51).Value,list.get(g+52).Value);
-           plans.add(x);
-           g=g+53;
-           }
+            
+         mainList = data.getNewGraphList(selectedCar.getIdplan());
+           
            
         }
         
@@ -116,7 +154,70 @@ public class PlanListNew implements Serializable{
     public void setFormedulist(SelectItem[] formedulist) {
         this.formedulist = formedulist;
     }
-        
+         public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
+    }
+    
+   
+    public void addyear(){
+        mainList.add(new newGraph("", "",null,null, new GraphValue(null, null, "", 0,DayOrNight),new GraphValue(null, null, "", 0,DayOrNight),new GraphValue(null, null, "", 0,DayOrNight),new GraphValue(null, null, "", 0,DayOrNight),new GraphValue(null, null, "", 0,DayOrNight),new GraphValue(null, null, "", 0,DayOrNight),new GraphValue(null, null, "", 0,DayOrNight),new GraphValue(null, null, "", 0,DayOrNight),new GraphValue(null, null, "", 0,DayOrNight),new GraphValue(null, null, "", 0,DayOrNight)));
+    }
+  
+    
+    public void deleteYear(){
+    mainList.clear();
+    }
+    
+    public String nGraph(){
+        mainList.clear();
+        return "newGraph?faces-redirect=true";
+    }
+    
+    
+    public void tableCellEdit(CellEditEvent e){
+       for(int i = 0;i<mainList.size();i++){
+           
+          mainList.get(i).end = mainList.get(i).start;
+          
+          if( mainList.get(i).value1.end!=null && mainList.get(i).value1.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value1.end;
+          }
+          if( mainList.get(i).value2.end!=null && mainList.get(i).value2.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value2.end;
+          } 
+          if(mainList.get(i).value3.end!=null && mainList.get(i).value3.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value3.end;
+          } 
+          if(mainList.get(i).value4.end!=null&&mainList.get(i).value4.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value4.end;
+          } 
+          if(mainList.get(i).value5.end!=null && mainList.get(i).value5.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value5.end;
+          } 
+          if(mainList.get(i).value6.end!=null &&mainList.get(i).value6.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value6.end;
+          } 
+          if(mainList.get(i).value7.end!=null &&mainList.get(i).value7.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value7.end;
+          } 
+          if(mainList.get(i).value8.end!=null &&mainList.get(i).value8.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value8.end;
+          } 
+          if(mainList.get(i).value9.end!=null &&mainList.get(i).value9.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value9.end;
+          } 
+          if(mainList.get(i).value10.end!=null &&mainList.get(i).value10.end.getTime() > mainList.get(i).end.getTime()){
+              mainList.get(i).end = mainList.get(i).value10.end;
+          } 
+          
+       }
+     
+    }
+    
 	public PlanListNew() throws ClassNotFoundException, SQLException {
 		carsSmall = new ArrayList<Plan>();
                 filteredCars = new ArrayList<Plan>();
@@ -133,6 +234,19 @@ public class PlanListNew implements Serializable{
                 okrlist[2] = new SelectItem("Спеціаліст","Спеціаліст");
                 okrlist[3] = new SelectItem("Магістр","Магістр");
                 //-----------------------------------------
+                coursesList.clear();
+    coursesList.add("");
+    coursesList.add("1");
+    coursesList.add("2");
+    coursesList.add("3");
+    coursesList.add("4");
+    coursesList.add("5");
+    SemestersList.clear();
+    SemestersList.add("");
+    SemestersList.add("Весінній");
+    SemestersList.add("Осінній");
+    reductionList = data.getListLegendic();
+    
               insertData();
 	}
         

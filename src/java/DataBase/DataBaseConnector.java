@@ -1,13 +1,16 @@
 package DataBase;
 
-import DataClasses.oznaka;
+import DataClasses.GraphValue;
+import DataClasses.Plan;
 import DataClasses.PlanValuesFromBase;
 import DataClasses.SpecialityData;
 import DataClasses.StudyPlan;
+import DataClasses.newGraph;
+import DataClasses.oznaka;
 import DataClasses.typeDic;
-import DataClasses.Plan;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -397,6 +400,128 @@ public class DataBaseConnector  implements Serializable{
                 return res.getInt(1);}
             else return 0;
    }
+   
+   public List<newGraph> getNewGraphList(String idPlan){
+       List<newGraph> list = new ArrayList<newGraph>();
+       try{
+           
+       Statement stat = conn.createStatement();
+       ResultSet res = null;
+       
+       res = stat.executeQuery("Select * from newgraphvalues where idgraph = " + idPlan);
+       
+       while (res.next()){
+           list.add(new newGraph(res.getInt(1), res.getString(2), res.getString(3), res.getDate(4), res.getDate(5), new GraphValue(null, null, "", 0,true), new GraphValue(null, null, "", 0,true), new GraphValue(null, null, "", 0,true), new GraphValue(null, null, "", 0,true), new GraphValue(null, null, "", 0,true), new GraphValue(null, null, "", 0,true), new GraphValue(null, null, "", 0,true), new GraphValue(null, null, "", 0,true), new GraphValue(null, null, "", 0,true), new GraphValue(null, null, "", 0,true)));
+       }
+       
+       for(int i = 0; i<list.size();i++){
+           
+           res = stat.executeQuery("Select * from newgraphvaluesbypoints where idvalue = "+list.get(i).id);
+           
+           while(res.next()){
+           
+               switch(res.getInt(8)){
+                   case 1: { 
+                       list.get(i).value1.idGraph = res.getInt(1);
+                       list.get(i).value1.start = Date.valueOf(res.getString(2));
+                       list.get(i).value1.end = Date.valueOf(res.getString(3));
+                       list.get(i).value1.count = res.getInt(4);
+                       list.get(i).value1.dayWalker = res.getBoolean(5);
+                       list.get(i).value1.type = res.getString(7);
+                           break;
+                   }
+                   case 2: { 
+                       list.get(i).value2.idGraph = res.getInt(1);
+                       list.get(i).value2.start = Date.valueOf(res.getString(2));
+                       list.get(i).value2.end = Date.valueOf(res.getString(3));
+                       list.get(i).value2.count = res.getInt(4);
+                       list.get(i).value2.dayWalker = res.getBoolean(5);
+                       list.get(i).value2.type = res.getString(7);
+                           break;
+                   }
+                   case 3: { 
+                       list.get(i).value3.idGraph = res.getInt(1);
+                       list.get(i).value3.start = Date.valueOf(res.getString(2));
+                       list.get(i).value3.end = Date.valueOf(res.getString(3));
+                       list.get(i).value3.count = res.getInt(4);
+                       list.get(i).value3.dayWalker = res.getBoolean(5);
+                       list.get(i).value3.type = res.getString(7);
+                           break;
+                   }
+                   case 4: { 
+                       list.get(i).value4.idGraph = res.getInt(1);
+                       list.get(i).value4.start = Date.valueOf(res.getString(2));
+                       list.get(i).value4.end = Date.valueOf(res.getString(3));
+                       list.get(i).value4.count = res.getInt(4);
+                       list.get(i).value4.dayWalker = res.getBoolean(5);
+                       list.get(i).value4.type = res.getString(7);
+                           break;
+                   }
+                   case 5: { 
+                       list.get(i).value5.idGraph = res.getInt(1);
+                       list.get(i).value5.start = Date.valueOf(res.getString(2));
+                       list.get(i).value5.end = Date.valueOf(res.getString(3));
+                       list.get(i).value5.count = res.getInt(4);
+                       list.get(i).value5.dayWalker = res.getBoolean(5);
+                       list.get(i).value5.type = res.getString(7);
+                           break;
+                   }
+                   case 6: { 
+                       list.get(i).value6.idGraph = res.getInt(1);
+                       list.get(i).value6.start = Date.valueOf(res.getString(2));
+                       list.get(i).value6.end = Date.valueOf(res.getString(3));
+                       list.get(i).value6.count = res.getInt(4);
+                       list.get(i).value6.dayWalker = res.getBoolean(5);
+                       list.get(i).value6.type = res.getString(7);
+                           break;
+                   }
+                   case 7: { 
+                       list.get(i).value7.idGraph = res.getInt(1);
+                       list.get(i).value7.start = Date.valueOf(res.getString(2));
+                       list.get(i).value7.end = Date.valueOf(res.getString(3));
+                       list.get(i).value7.count = res.getInt(4);
+                       list.get(i).value7.dayWalker = res.getBoolean(5);
+                       list.get(i).value7.type = res.getString(7);
+                           break;
+                   }
+                   case 8: { 
+                       list.get(i).value8.idGraph = res.getInt(1);
+                       list.get(i).value8.start = Date.valueOf(res.getString(2));
+                       list.get(i).value8.end = Date.valueOf(res.getString(3));
+                       list.get(i).value8.count = res.getInt(4);
+                       list.get(i).value8.dayWalker = res.getBoolean(5);
+                       list.get(i).value8.type = res.getString(7);
+                           break;
+                   }
+                   case 9: { 
+                       list.get(i).value9.idGraph = res.getInt(1);
+                       list.get(i).value9.start = Date.valueOf(res.getString(2));
+                       list.get(i).value9.end = Date.valueOf(res.getString(3));
+                       list.get(i).value9.count = res.getInt(4);
+                       list.get(i).value9.dayWalker = res.getBoolean(5);
+                       list.get(i).value9.type = res.getString(7);
+                           break;
+                   }
+                   case 10: { 
+                       list.get(i).value10.idGraph = res.getInt(1);
+                       list.get(i).value10.start = Date.valueOf(res.getString(2));
+                       list.get(i).value10.end = Date.valueOf(res.getString(3));
+                       list.get(i).value10.count = res.getInt(4);
+                       list.get(i).value10.dayWalker = res.getBoolean(5);
+                       list.get(i).value10.type = res.getString(7);
+                           break;
+                   }
+               }
+               
+               
+           }
+           
+       }
+       
+       }catch(Exception e){}
+       return list;
+   }
+   
    public void Query(String text) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
             Statement stat = conn.createStatement();
             boolean res = stat.execute(text);
